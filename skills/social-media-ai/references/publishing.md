@@ -26,6 +26,21 @@ For direct Instagram publishing, the verified flow is `POST /{ig-id}/media`, `GE
 
 Buffer provides an official remote MCP server at `https://mcp.buffer.com/mcp`. Prefer its connected tools when available. Typical sequence: `get_account`, `list_channels`, then `get_channel` for the selected destination's schedule and capabilities. The publishing tools include `create_post`, `get_post`, and `list_posts`. Discover actual tool names and schemas in the environment. [Official MCP reference](https://developers.buffer.com/guides/integrations/mcp.html).
 
+### Configure the optional connection in Codex
+
+After the user chooses Buffer and approves the connection, inspect existing MCP entries before adding one. With Codex CLI available, first check `codex mcp --help` and `codex mcp list`. If the endpoint is not already configured, the supported connection commands are:
+
+```sh
+codex mcp add buffer --url https://mcp.buffer.com/mcp
+codex mcp login buffer
+```
+
+Adding the server may already initiate login; run `login` only if authentication is still needed. Let the user complete OAuth. Without CLI access, guide them through Settings → MCP servers → Add server, using the same HTTPS endpoint, then Authenticate. Use an existing plugin connection instead when available. [Official Codex connection instructions](https://learn.chatgpt.com/docs/extend/mcp?surface=cli), [Buffer connection guidance](https://developers.buffer.com/guides/integrations/other-ai-tools.html).
+
+Refresh the host's tools if required, then verify identity and select the intended social channel read-only. If no channel exists, guide the user through connecting that social account in Buffer before continuing. A configured endpoint, completed provider login, and connected social channel are separate states. Save the verified state and ask about the next account only after this one is complete or skipped. Set up the media-upload route below before promising unattended local-folder posting.
+
+### Other Buffer interfaces
+
 If using the official CLI instead, install `@bufferapp/cli` only as part of the chosen setup. `buffer init` configures authentication; `buffer doctor`, `buffer channels list`, and `buffer schema describe posts create` support verification. Prepare JSON in a local file, then validate with `buffer posts create --input post.json --dry-run`. Execute the same command without `--dry-run` only within the user's existing posting authorization. JSON files avoid shell-escaping captions. [Official CLI](https://developers.buffer.com/guides/cli.html).
 
 For direct GraphQL, POST JSON to `https://api.buffer.com` with `Content-Type: application/json` and `Authorization: Bearer <token>`. Personal API keys belong to the user's own Buffer account and are created in Settings → API. Read `BUFFER_API_KEY` from the environment rather than embedding it in code. OAuth is available for a distributed application that acts for multiple users; a personal installation does not need its own OAuth client. [Authentication](https://developers.buffer.com/guides/authentication.html).

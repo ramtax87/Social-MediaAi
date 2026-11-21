@@ -11,7 +11,9 @@ This skill supplies instructions and local helpers. It does not itself supply so
 
 ## Set up once
 
-Read [setup.md](references/setup.md) for a new setup or an account change. Start with existing configuration and session answers. Ask only for missing information: source folder, selected platforms, account identities, schedule and timezone, caption language/style, and editing preferences. Use a separate working folder for derivatives and private state.
+Read [setup.md](references/setup.md) for a new setup or an account change. Perform the technical setup: inspect available tools, run `scripts/setup.py init` after learning the source folder, use `doctor` to find local gaps, and save the user's answers yourself. Continue from existing configuration and session answers. Ask only for missing information: source folder, selected platforms, account identities, schedule and timezone, caption language/style, and editing preferences. Use a separate working folder for derivatives and private state. If skill discovery hasn't refreshed after installation, read this file directly and continue.
+
+Read [approvals.md](references/approvals.md) for precise approval boundaries and short question examples. Prepare the concrete action first; reuse already granted authorization. The user should handle choices and their own sign-ins, while the agent handles configuration and verification. Offer [prompts.md](references/prompts.md) for setup, resume, preview, approval, schedule changes, pause, and repair.
 
 **Connect each account separately.** Ask which connection to do first; complete or explicitly skip it before asking about the next. Even if a provider exposes several accounts, enable only the individually selected destination. Discover an existing authorized connector first. If absent, offer a supported connector or official API route; use the provider's login/consent flow. Never ask for social passwords, cookies, 2FA codes, or tokens in the conversation. Verify the account with a read-only identity call. Explain a permission or account-type limitation for that connection alone.
 
@@ -33,7 +35,7 @@ Prepare a concrete first batch showing derivatives, captions, target accounts, a
 
 Read [scheduling.md](references/scheduling.md) when creating, changing, or pausing recurrence. Show the next few local dates with timezone offsets, then configure the available scheduler within the user's requested scope. Record its returned ID and verify it exists. A written prompt or JSON profile is not an active schedule.
 
-Use one durable shared queue across manual and scheduled runs. A run processes a bounded batch; it must not replay a backlog in a burst. When paused or empty, report that and exit. Pausing ingestion does not cancel posts already queued at a provider: inspect and pause/cancel those as part of an explicit request to stop posting.
+Use one durable shared queue across manual and scheduled runs. In review mode, submit previously approved jobs when appropriate while leaving newly prepared items as drafts. A run processes a bounded batch; it must not replay a backlog in a burst. When paused or empty, report that and exit. Pausing ingestion does not cancel posts already queued at a provider: inspect and pause/cancel those as part of an explicit request to stop posting.
 
 ## Report plainly
 
