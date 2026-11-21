@@ -1,0 +1,4 @@
+interface:
+  display_name: "Social-MediaAi"
+  short_description: "Clean media and manage scheduled social posts"
+  default_prompt: "Use $social-media-ai to set up my media folder and posting schedule. Ask me about each social account connection separately."

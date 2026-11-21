@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "source_folder": null,
+  "recursive": false,
+  "workspace_folder": null,
+  "timezone": null,
+  "paused": true,
+  "connections": [],
+  "schedule": {
+    "days": [],
+    "local_times": [],
+    "max_posts_per_account_per_day": 1,
+    "max_new_jobs_per_run": 5,
+    "missed_run_policy": "skip_elapsed_slots",
+    "scheduler_id": null
+  },
+  "editing": {
+    "style": "natural",
+    "preserve_identity_and_product_details": true,
+    "crop": "fit_without_cropping",
+    "video_denoise": false,
+    "audio_cleanup": false,
+    "added_music": false
+  },
+  "captions": {
+    "language": null,
+    "tone": "clear and factual",
+    "brand_notes": "",
+    "exclusions": []
+  },
+  "authorization": {
+    "mode": "review",
+    "recorded_at": null,
+    "scope": null
+  },
+  "media_host": null
+}
